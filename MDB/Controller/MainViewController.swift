@@ -69,7 +69,7 @@ class MainViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         self.actInd.startAnimating()
         let url = appDelegate.mdbBuildUrl(pathName: "/3/movie/now_playing", methodParameters: ["api_key": Constats.Mdb.ApiKey])
         appDelegate.getJsonData(url: url) { (data) in
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3), execute: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
                 self.MovieData = data
                 DispatchQueue.main.async {
                     self.actInd.stopAnimating()
