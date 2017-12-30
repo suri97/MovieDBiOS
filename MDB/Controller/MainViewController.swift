@@ -38,6 +38,15 @@ class MainViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         cell.movieYear.text = appDelegate.getYearFromDate(date: date)
         cell.movieMonth.text = appDelegate.getMonthFromDate(date: date)
         
+        var genreArr = MovieData.results[indexPath.row].genre_ids
+        var genreLabel: String = appDelegate.genre[genreArr[0]]!
+        if genreArr.count > 1 {
+            for i in 1..<genreArr.count {
+                genreLabel += ", \(appDelegate.genre[ genreArr[i] ]!)"
+            }
+        }
+        cell.genre.text = genreLabel
+        
         if let imageURL = URL(string: Constats.Mdb.baseImgUrl + "/w92" + MovieData.results[indexPath.row].poster_path) {
             DispatchQueue.global().async {
                 let data = try? Data(contentsOf: imageURL)

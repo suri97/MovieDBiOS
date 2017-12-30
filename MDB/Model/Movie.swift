@@ -14,12 +14,14 @@ class Movie: NSObject, Codable {
     let title: String
     let poster_path: String
     let release_date: String
+    let genre_ids: [Int]
     
-    init(id: Int64, title: String, poster_path: String,release_date: String) {
+    init(id: Int64, title: String, poster_path: String,release_date: String,genre_ids: [Int]) {
         self.id = id
         self.title = title
         self.poster_path = poster_path
         self.release_date = release_date
+        self.genre_ids = genre_ids
     }
     
 }
