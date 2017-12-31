@@ -79,8 +79,25 @@ class MainViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         cell.listType.textColor = UIColor.red
         cell.listType.text = ListType[indexPath.row]
         cell.backgroundColor = UIColor.clear
-        cell.layer.borderWidth = 0.6
-        cell.layer.borderColor = UIColor.red.cgColor
+        cell.contentView.layer.borderWidth = 1
+        cell.contentView.layer.borderColor = UIColor.red.cgColor
+        cell.contentView.layer.masksToBounds = true;
+        
+        var path = UIBezierPath()
+        
+        if indexPath.row == 0 {
+        path = UIBezierPath(roundedRect: cell.bounds, byRoundingCorners: [UIRectCorner.bottomLeft,UIRectCorner.topLeft], cornerRadii: CGSize(width: 6, height: 6))
+            let mask = CAShapeLayer()
+            mask.path = path.cgPath
+            cell.layer.mask = mask
+        }
+        else if indexPath.row == 3 {
+            path = UIBezierPath(roundedRect: cell.bounds, byRoundingCorners: [UIRectCorner.bottomRight,UIRectCorner.topRight], cornerRadii: CGSize(width: 6, height: 6))
+            let mask = CAShapeLayer()
+            mask.path = path.cgPath
+            cell.layer.mask = mask
+        }
+        
         return cell
     }
     
@@ -95,20 +112,20 @@ class MainViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! ListTypeCell
         cell.listType.textColor = UIColor.black
-        cell.backgroundColor = UIColor.red
+        cell.contentView.backgroundColor = UIColor.red
         fetchData(ListType: cell.listType.text!)
     }
     
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! ListTypeCell
         cell.listType.textColor = UIColor.black
-        cell.backgroundColor = UIColor.red
+        cell.contentView.backgroundColor = UIColor.red
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! ListTypeCell
         cell.listType.textColor = UIColor.red
-        cell.backgroundColor = UIColor.clear
+        cell.contentView.backgroundColor = UIColor.clear
     }
     
     func fetchData(ListType: String) -> Void {

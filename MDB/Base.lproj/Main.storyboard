@@ -11,7 +11,7 @@
     </dependencies>
     <customFonts key="customFonts">
         <array key="GillSans.ttc">
-            <string>GillSans</string>
+            <string>GillSans-SemiBold</string>
         </array>
     </customFonts>
     <scenes>
@@ -82,7 +82,7 @@
                                 </prototypes>
                             </tableView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="LnB-cy-Iew">
-                                <rect key="frame" x="44" y="43" width="276" height="45"/>
+                                <rect key="frame" x="52" y="43" width="267" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Dx5-L8-xCV">
@@ -100,8 +100,8 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cIt-LI-PQh" userLabel="ListType">
-                                                    <rect key="frame" x="12.5" y="18.5" width="25.5" height="14"/>
-                                                    <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="12"/>
+                                                    <rect key="frame" x="12.5" y="18.5" width="26" height="14"/>
+                                                    <fontDescription key="fontDescription" name="GillSans-SemiBold" family="Gill Sans" pointSize="11"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
