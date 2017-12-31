@@ -31,6 +31,14 @@ class MainViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         UIApplication.shared.statusBarStyle = .lightContent
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        self.listTypeCV.selectItem(at: IndexPath(item: 0, section: 0), animated: false, scrollPosition: .left)
+        let cell = listTypeCV.cellForItem(at: IndexPath(item: 0, section: 0)) as! ListTypeCell
+        cell.listType.textColor = UIColor.black
+        cell.contentView.backgroundColor = UIColor.red
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return MovieData.results.count
     }
