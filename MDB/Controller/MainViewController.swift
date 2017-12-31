@@ -8,24 +8,29 @@
 
 import UIKit
 
-class MainViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class MainViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var MovieData =  MovieJson(results: [])
     @IBOutlet weak var tableView: UITableView!
     var actInd = UIActivityIndicatorView()
+    @IBOutlet weak var listTypeCV: UICollectionView!
+    let ListType: [String] = ["In Theatres","Popuar","Top Rated", "Upcoming"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         ActivityIndicatory(uiView: self.view)
-        fetchData()
+        fetchData(ListType: "In Theatres")
         tableView.delegate = self
         tableView.dataSource = self
+        listTypeCV.delegate = self
+        listTypeCV.dataSource = self
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = UIColor.black
+        listTypeCV.backgroundColor = UIColor.clear
         UIApplication.shared.statusBarStyle = .lightContent
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return MovieData.results.count
     }
@@ -65,17 +70,63 @@ class MainViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         return 120
     }
     
-    func fetchData() -> Void {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ListTypeCell", for: indexPath) as! ListTypeCell
+        cell.listType.textColor = UIColor.red
+        cell.listType.text = ListType[indexPath.row]
+        cell.backgroundColor = UIColor.clear
+        cell.layer.borderWidth = 0.6
+        cell.layer.borderColor = UIColor.red.cgColor
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width/4, height: 25)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! ListTypeCell
+        cell.listType.textColor = UIColor.black
+        cell.backgroundColor = UIColor.red
+        fetchData(ListType: cell.listType.text!)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! ListTypeCell
+        cell.listType.textColor = UIColor.black
+        cell.backgroundColor = UIColor.red
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! ListTypeCell
+        cell.listType.textColor = UIColor.red
+        cell.backgroundColor = UIColor.clear
+    }
+    
+    func fetchData(ListType: String) -> Void {
+        var temp: String
+        if (ListType == "In Theatres") { temp = "now_playing" }
+        else if ( ListType == "Popuar") { temp = "popular" }
+        else if ( ListType == "Top Rated") { temp = "top_rated" }
+        else { temp = "upcoming" }
+        self.MovieData = MovieJson(results: [])
+        self.tableView.reloadData()
         self.actInd.startAnimating()
-        let url = appDelegate.mdbBuildUrl(pathName: "/3/movie/now_playing", methodParameters: ["api_key": Constats.Mdb.ApiKey])
+        let url = appDelegate.mdbBuildUrl(pathName: "/3/movie/" + temp, methodParameters: ["api_key": Constats.Mdb.ApiKey])
         appDelegate.getJsonData(url: url) { (data) in
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: {
                 self.MovieData = data
                 DispatchQueue.main.async {
                     self.actInd.stopAnimating()
                     self.tableView.reloadData()
                 }
-            })
         }
     }
     func ActivityIndicatory(uiView: UIView) {
