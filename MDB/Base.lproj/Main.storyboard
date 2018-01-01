@@ -33,7 +33,7 @@
                                 </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oet-fv-TJP">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="69" width="375" height="598"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="0.40469820205479451" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
@@ -115,7 +115,7 @@
                             <constraint firstItem="dlr-Tw-qRs" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="Eyt-ah-oEA"/>
                             <constraint firstItem="oet-fv-TJP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="UZ0-TO-ky5"/>
                             <constraint firstItem="oet-fv-TJP" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Y3g-VR-p8G"/>
-                            <constraint firstItem="oet-fv-TJP" firstAttribute="firstBaseline" secondItem="dlr-Tw-qRs" secondAttribute="baseline" constant="15" id="c9E-cS-5HB"/>
+                            <constraint firstItem="oet-fv-TJP" firstAttribute="firstBaseline" secondItem="dlr-Tw-qRs" secondAttribute="baseline" constant="20" id="c9E-cS-5HB"/>
                             <constraint firstItem="dlr-Tw-qRs" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="gqY-Q1-Gxf"/>
                             <constraint firstItem="oet-fv-TJP" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="ppQ-XU-U4l"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dlr-Tw-qRs" secondAttribute="trailing" constant="30" id="qEl-zR-g98"/>

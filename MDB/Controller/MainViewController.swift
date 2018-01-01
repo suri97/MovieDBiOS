@@ -16,6 +16,13 @@ class MainViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     var actInd = UIActivityIndicatorView()
     @IBOutlet weak var listTypeSegOutlet: UISegmentedControl!
     let ListType: [String] = ["now_playing","popular","top_rated", "upcoming"]
+    
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(self.handleRefresh(_:)), for: UIControlEvents.valueChanged)
+        refreshControl.tintColor = UIColor.red
+        return refreshControl
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,12 +36,26 @@ class MainViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     func setUpViews() -> Void {
         ActivityIndicatory(uiView: self.view)
         fetchData(ListType: "now_playing")
+        self.tableView.addSubview(self.refreshControl)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = UIColor.black
         UIApplication.shared.statusBarStyle = .lightContent
         listTypeSegOutlet.tintColor = UIColor.red
+    }
+    
+    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+        self.MovieData = MovieJson(results: [])
+        self.tableView.reloadData()
+        let url = appDelegate.mdbBuildUrl(pathName: "/3/movie/" + ListType[listTypeSegOutlet.selectedSegmentIndex], methodParameters: ["api_key": Constats.Mdb.ApiKey])
+        appDelegate.getJsonData(url: url) { (data) in
+            self.MovieData = data
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                self.refreshControl.endRefreshing()
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
