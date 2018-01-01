@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,9 +19,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="dlr-Tw-qRs">
-                                <rect key="frame" x="34" y="32" width="300" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="dlr-Tw-qRs">
+                                <rect key="frame" x="30" y="30" width="315" height="29"/>
                                 <segments>
                                     <segment title="In Theatres"/>
                                     <segment title="Popular"/>
@@ -31,9 +31,8 @@
                                     <action selector="listTypeChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="wcx-yR-S7A"/>
                                 </connections>
                             </segmentedControl>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oet-fv-TJP">
-                                <rect key="frame" x="0.0" y="75" width="375" height="592"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oet-fv-TJP">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="0.40469820205479451" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
@@ -90,6 +89,15 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="dlr-Tw-qRs" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="Eyt-ah-oEA"/>
+                            <constraint firstItem="oet-fv-TJP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="UZ0-TO-ky5"/>
+                            <constraint firstItem="oet-fv-TJP" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Y3g-VR-p8G"/>
+                            <constraint firstItem="oet-fv-TJP" firstAttribute="firstBaseline" secondItem="dlr-Tw-qRs" secondAttribute="baseline" constant="15" id="c9E-cS-5HB"/>
+                            <constraint firstItem="dlr-Tw-qRs" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="gqY-Q1-Gxf"/>
+                            <constraint firstItem="oet-fv-TJP" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="ppQ-XU-U4l"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dlr-Tw-qRs" secondAttribute="trailing" constant="30" id="qEl-zR-g98"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
