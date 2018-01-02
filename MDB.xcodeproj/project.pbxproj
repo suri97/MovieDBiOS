@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		90A30E401FFBFC4F0046A03F /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A30E3F1FFBFC4F0046A03F /* SearchViewController.swift */; };
 		90BD99A91FF7830900FB2756 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BD99A81FF7830900FB2756 /* AppDelegate.swift */; };
 		90BD99AB1FF7830900FB2756 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BD99AA1FF7830900FB2756 /* MainViewController.swift */; };
 		90BD99AE1FF7830900FB2756 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90BD99AC1FF7830900FB2756 /* Main.storyboard */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		90A30E3F1FFBFC4F0046A03F /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		90BD99A51FF7830900FB2756 /* MDB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MDB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90BD99A81FF7830900FB2756 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		90BD99AA1FF7830900FB2756 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				90BD99AA1FF7830900FB2756 /* MainViewController.swift */,
+				90A30E3F1FFBFC4F0046A03F /* SearchViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90A30E401FFBFC4F0046A03F /* SearchViewController.swift in Sources */,
 				90BD99DC1FF78A7600FB2756 /* Constats.swift in Sources */,
 				90BD99AB1FF7830900FB2756 /* MainViewController.swift in Sources */,
 				90BD99A91FF7830900FB2756 /* AppDelegate.swift in Sources */,
