@@ -17,6 +17,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var MovieData =  MovieJson(results: [])
     let searchType = ["movie","tv"]
     var actInd = UIActivityIndicatorView()
+    @IBOutlet weak var resultLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +25,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func setUpViews() -> Void {
+        resultLabel.isHidden = true
+        ActivityIndicatory(uiView: self.view)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
@@ -36,6 +39,9 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         fetchData(searchType: searchType[segControl.selectedSegmentIndex], query: searchText)
     }
     
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
     
     @IBAction func handleSelection(_ sender: UISegmentedControl) {
         fetchData(searchType: searchType[sender.selectedSegmentIndex], query: searchBar.text!)
@@ -83,6 +89,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func fetchData(searchType: String, query: String) -> Void {
+        self.resultLabel.isHidden = true
         self.MovieData = MovieJson(results: [])
         self.tableView.reloadData()
         self.actInd.startAnimating()
@@ -91,7 +98,12 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             self.MovieData = data
             DispatchQueue.main.async {
                 self.actInd.stopAnimating()
-                self.tableView.reloadData()
+                if self.MovieData.results.count > 0 {
+                    self.tableView.reloadData()
+                }
+                else {
+                    self.resultLabel.isHidden = false
+                }
             }
         }
     }

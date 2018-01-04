@@ -122,6 +122,13 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No Results" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dov-lA-g0u" userLabel="Result">
+                                <rect key="frame" x="0.0" y="311" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="eiG-hB-dPF">
                                 <rect key="frame" x="25" y="91" width="325" height="29"/>
                                 <segments>
@@ -150,6 +157,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="search" id="sfF-hA-D9t"/>
                     <connections>
+                        <outlet property="resultLabel" destination="Dov-lA-g0u" id="kKC-DC-RHX"/>
                         <outlet property="searchBar" destination="oXy-Ti-IDS" id="mnd-Qj-RjS"/>
                         <outlet property="segControl" destination="eiG-hB-dPF" id="hXF-hA-Usj"/>
                         <outlet property="tableView" destination="oJF-Wx-Vee" id="FgW-qG-MXR"/>
