@@ -74,6 +74,23 @@ extension AppDelegate {
         }.resume()
     }
     
+    func getTVJsonData(url: URL, completion: @escaping (_ json: TVJson) -> Void ) {
+        
+        var TVData = TVJson(results: [])
+        URLSession.shared.dataTask(with: url) { (data, res, err) in
+            if let data = data {
+                do {
+                    TVData = try JSONDecoder().decode(TVJson.self, from: data)
+                    print(TVData.results.count)
+                    completion(TVData)
+                } catch let error {
+                    print(error)
+                    completion(TVData)
+                }
+            }
+            }.resume()
+    }
+    
     func getYear(release_date: String) -> Date {
         let dateFormat = DateFormatter()
         dateFormat.dateFormat = "yyyy-MM-dd"

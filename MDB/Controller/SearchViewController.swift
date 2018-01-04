@@ -15,6 +15,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var segControl: UISegmentedControl!
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var MovieData =  MovieJson(results: [])
+    var TVData =  TVJson(results: [])
     let searchType = ["movie","tv"]
     var actInd = UIActivityIndicatorView()
     @IBOutlet weak var resultLabel: UILabel!
@@ -25,7 +26,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func setUpViews() -> Void {
-        resultLabel.isHidden = true
         ActivityIndicatory(uiView: self.view)
         tableView.delegate = self
         tableView.dataSource = self
@@ -49,28 +49,60 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return MovieData.results.count
+        if searchType[segControl.selectedSegmentIndex] == "movie" {
+            return MovieData.results.count
+        }
+        return TVData.results.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SearchCell") as! MovieCell
-        cell.movieTitle.text = MovieData.results[indexPath.row].title
         
-        let date = appDelegate.getYear(release_date: MovieData.results[indexPath.row].release_date)
-        cell.movieYear.text = appDelegate.getYearFromDate(date: date)
-        cell.movieMonth.text = appDelegate.getMonthFromDate(date: date)
-        
-        var genreArr = MovieData.results[indexPath.row].genre_ids
+        if searchType[segControl.selectedSegmentIndex] == "movie" {
+            cell.movieTitle.text = MovieData.results[indexPath.row].title
+        }
+        else {
+            cell.movieTitle.text = TVData.results[indexPath.row].original_name
+        }
+        if searchType[segControl.selectedSegmentIndex] == "movie" {
+            let date = appDelegate.getYear(release_date: MovieData.results[indexPath.row].release_date)
+            cell.movieYear.text = appDelegate.getYearFromDate(date: date)
+            cell.movieMonth.text = appDelegate.getMonthFromDate(date: date)
+        }
+        else {
+            if TVData.results[indexPath.row].first_air_date != "" {
+                let date = appDelegate.getYear(release_date: TVData.results[indexPath.row].first_air_date)
+                cell.movieYear.text = appDelegate.getYearFromDate(date: date)
+                cell.movieMonth.text = appDelegate.getMonthFromDate(date: date)
+            }
+        }
+        var genreArr: [Int]
+        if searchType[segControl.selectedSegmentIndex] == "movie" { genreArr = MovieData.results[indexPath.row].genre_ids }
+        else { genreArr = TVData.results[indexPath.row].genre_ids  }
         var genreLabel = ""
-        if ( genreArr.count > 0) { genreLabel = appDelegate.genre[genreArr[0]]! }
+        if ( genreArr.count > 0) {
+            if let label = appDelegate.genre[genreArr[0]] {
+                genreLabel = label
+            }
+        }
         if genreArr.count > 1 {
             for i in 1..<genreArr.count {
-                genreLabel += ", \(appDelegate.genre[ genreArr[i] ]!)"
+                if let label = appDelegate.genre[ genreArr[i] ] {
+                    genreLabel += ", \(label)"
+                }
             }
         }
         cell.genre.text = genreLabel
-        
-        if let imageURL = URL(string: Constats.Mdb.baseImgUrl + "/w92" + MovieData.results[indexPath.row].poster_path) {
+        var tempUrl: String = ""
+        if searchType[segControl.selectedSegmentIndex] == "movie" {
+            tempUrl = MovieData.results[indexPath.row].poster_path
+        }
+        else {
+            if let poster = TVData.results[indexPath.row].poster_path {
+                tempUrl = poster
+            }
+        }
+        if let imageURL = URL(string: Constats.Mdb.baseImgUrl + "/w92" + tempUrl) {
             DispatchQueue.global().async {
                 let data = try? Data(contentsOf: imageURL)
                 if let data = data {
@@ -91,18 +123,36 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func fetchData(searchType: String, query: String) -> Void {
         self.resultLabel.isHidden = true
         self.MovieData = MovieJson(results: [])
+        self.TVData = TVJson(results: [])
         self.tableView.reloadData()
         self.actInd.startAnimating()
-        let url = appDelegate.mdbBuildUrl(pathName: "/3/search/" + searchType, methodParameters: ["api_key": Constats.Mdb.ApiKey,"query": query])
-        appDelegate.getJsonData(url: url) { (data) in
-            self.MovieData = data
-            DispatchQueue.main.async {
-                self.actInd.stopAnimating()
-                if self.MovieData.results.count > 0 {
-                    self.tableView.reloadData()
+        if searchType == "movie" {
+            let url = appDelegate.mdbBuildUrl(pathName: "/3/search/" + searchType, methodParameters: ["api_key": Constats.Mdb.ApiKey,"query": query])
+            appDelegate.getJsonData(url: url) { (data) in
+                self.MovieData = data
+                DispatchQueue.main.async {
+                    self.actInd.stopAnimating()
+                    if self.MovieData.results.count > 0 {
+                        self.tableView.reloadData()
+                    }
+                    else {
+                        self.resultLabel.isHidden = false
+                    }
                 }
-                else {
-                    self.resultLabel.isHidden = false
+            }
+        }
+        else {
+            let url = appDelegate.mdbBuildUrl(pathName: "/3/search/" + searchType, methodParameters: ["api_key": Constats.Mdb.ApiKey,"query": query])
+            appDelegate.getTVJsonData(url: url) { (data) in
+                self.TVData = data
+                DispatchQueue.main.async {
+                    self.actInd.stopAnimating()
+                    if self.TVData.results.count > 0 {
+                        self.tableView.reloadData()
+                    }
+                    else {
+                        self.resultLabel.isHidden = false
+                    }
                 }
             }
         }

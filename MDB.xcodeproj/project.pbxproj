@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9073569A1FFEC5470063AE57 /* TVShows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907356991FFEC5470063AE57 /* TVShows.swift */; };
 		90A30E401FFBFC4F0046A03F /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A30E3F1FFBFC4F0046A03F /* SearchViewController.swift */; };
 		90BD99A91FF7830900FB2756 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BD99A81FF7830900FB2756 /* AppDelegate.swift */; };
 		90BD99AB1FF7830900FB2756 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90BD99AA1FF7830900FB2756 /* MainViewController.swift */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		907356991FFEC5470063AE57 /* TVShows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVShows.swift; sourceTree = "<group>"; };
 		90A30E3F1FFBFC4F0046A03F /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		90BD99A51FF7830900FB2756 /* MDB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MDB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90BD99A81FF7830900FB2756 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 			children = (
 				90BD99D91FF785B900FB2756 /* Movie.swift */,
 				90BD99DB1FF78A7600FB2756 /* Constats.swift */,
+				907356991FFEC5470063AE57 /* TVShows.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				90A30E401FFBFC4F0046A03F /* SearchViewController.swift in Sources */,
 				90BD99DC1FF78A7600FB2756 /* Constats.swift in Sources */,
 				90BD99AB1FF7830900FB2756 /* MainViewController.swift in Sources */,
+				9073569A1FFEC5470063AE57 /* TVShows.swift in Sources */,
 				90BD99A91FF7830900FB2756 /* AppDelegate.swift in Sources */,
 				90BD99DE1FF7C0A500FB2756 /* MovieCell.swift in Sources */,
 				90BD99DA1FF785B900FB2756 /* Movie.swift in Sources */,
