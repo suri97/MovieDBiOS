@@ -44,7 +44,9 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     @IBAction func handleSelection(_ sender: UISegmentedControl) {
-        fetchData(searchType: searchType[sender.selectedSegmentIndex], query: searchBar.text!)
+        if searchBar.text != "" {
+            fetchData(searchType: searchType[sender.selectedSegmentIndex], query: searchBar.text!)
+        }
     }
     
     
@@ -65,9 +67,11 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             cell.movieTitle.text = TVData.results[indexPath.row].original_name
         }
         if searchType[segControl.selectedSegmentIndex] == "movie" {
-            let date = appDelegate.getYear(release_date: MovieData.results[indexPath.row].release_date)
-            cell.movieYear.text = appDelegate.getYearFromDate(date: date)
-            cell.movieMonth.text = appDelegate.getMonthFromDate(date: date)
+            if MovieData.results[indexPath.row].release_date != "" {
+                let date = appDelegate.getYear(release_date: MovieData.results[indexPath.row].release_date)
+                cell.movieYear.text = appDelegate.getYearFromDate(date: date)
+                cell.movieMonth.text = appDelegate.getMonthFromDate(date: date)
+            }
         }
         else {
             if TVData.results[indexPath.row].first_air_date != "" {
@@ -95,7 +99,9 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         cell.genre.text = genreLabel
         var tempUrl: String = ""
         if searchType[segControl.selectedSegmentIndex] == "movie" {
-            tempUrl = MovieData.results[indexPath.row].poster_path
+            if let poster = MovieData.results[indexPath.row].poster_path {
+                tempUrl = poster
+            }
         }
         else {
             if let poster = TVData.results[indexPath.row].poster_path {

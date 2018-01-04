@@ -81,7 +81,6 @@ extension AppDelegate {
             if let data = data {
                 do {
                     TVData = try JSONDecoder().decode(TVJson.self, from: data)
-                    print(TVData.results.count)
                     completion(TVData)
                 } catch let error {
                     print(error)

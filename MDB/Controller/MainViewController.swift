@@ -79,8 +79,11 @@ class MainViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             }
         }
         cell.genre.text = genreLabel
-        
-        if let imageURL = URL(string: Constats.Mdb.baseImgUrl + "/w92" + MovieData.results[indexPath.row].poster_path) {
+        var tempUrl:String = ""
+        if let poster = MovieData.results[indexPath.row].poster_path {
+            tempUrl = poster
+        }
+        if let imageURL = URL(string: Constats.Mdb.baseImgUrl + "/w92" + tempUrl) {
             DispatchQueue.global().async {
                 let data = try? Data(contentsOf: imageURL)
                 if let data = data {
