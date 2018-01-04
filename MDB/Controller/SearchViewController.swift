@@ -8,26 +8,39 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var segControl: UISegmentedControl!
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var MovieData =  MovieJson(results: [])
+    let searchType = ["movie","tv"]
+    var actInd = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpViews()
     }
-
+    
     func setUpViews() -> Void {
-        fetchData(ListType: "now_playing")
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = UIColor.black
         UIApplication.shared.statusBarStyle = .lightContent
+        searchBar.delegate = self
     }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        fetchData(searchType: searchType[segControl.selectedSegmentIndex], query: searchText)
+    }
+    
+    
+    @IBAction func handleSelection(_ sender: UISegmentedControl) {
+        fetchData(searchType: searchType[sender.selectedSegmentIndex], query: searchBar.text!)
+    }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return MovieData.results.count
@@ -42,7 +55,8 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         cell.movieMonth.text = appDelegate.getMonthFromDate(date: date)
         
         var genreArr = MovieData.results[indexPath.row].genre_ids
-        var genreLabel: String = appDelegate.genre[genreArr[0]]!
+        var genreLabel = ""
+        if ( genreArr.count > 0) { genreLabel = appDelegate.genre[genreArr[0]]! }
         if genreArr.count > 1 {
             for i in 1..<genreArr.count {
                 genreLabel += ", \(appDelegate.genre[ genreArr[i] ]!)"
@@ -68,19 +82,26 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return 120
     }
     
-    func fetchData(ListType: String) -> Void {
+    func fetchData(searchType: String, query: String) -> Void {
         self.MovieData = MovieJson(results: [])
         self.tableView.reloadData()
-        //self.actInd.startAnimating()
-        let url = appDelegate.mdbBuildUrl(pathName: "/3/movie/" + ListType, methodParameters: ["api_key": Constats.Mdb.ApiKey])
+        self.actInd.startAnimating()
+        let url = appDelegate.mdbBuildUrl(pathName: "/3/search/" + searchType, methodParameters: ["api_key": Constats.Mdb.ApiKey,"query": query])
         appDelegate.getJsonData(url: url) { (data) in
             self.MovieData = data
             DispatchQueue.main.async {
-                //self.actInd.stopAnimating()
+                self.actInd.stopAnimating()
                 self.tableView.reloadData()
             }
         }
     }
-    
+    func ActivityIndicatory(uiView: UIView) {
+        self.actInd.frame = CGRect(x:0.0,y: 0.0,width: 40.0, height: 40.0);
+        self.actInd.center = uiView.center
+        self.actInd.hidesWhenStopped = true
+        self.actInd.activityIndicatorViewStyle =
+            UIActivityIndicatorViewStyle.whiteLarge
+        uiView.addSubview(self.actInd)
+    }
 
 }

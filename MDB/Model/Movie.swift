@@ -23,7 +23,6 @@ class Movie: NSObject, Codable {
         self.release_date = release_date
         self.genre_ids = genre_ids
     }
-    
 }
 
 class MovieJson: NSObject, Codable {

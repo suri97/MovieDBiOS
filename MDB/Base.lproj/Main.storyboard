@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Hil-EX-PNE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vm2-Gt-d7e">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -13,24 +13,24 @@
     </dependencies>
     <scenes>
         <!--Tab Bar Controller-->
-        <scene sceneID="Xqo-Fv-zKo">
+        <scene sceneID="Mh7-cO-Yrq">
             <objects>
-                <tabBarController id="Hil-EX-PNE" sceneMemberID="viewController">
+                <tabBarController id="vm2-Gt-d7e" sceneMemberID="viewController">
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="DwH-3O-YdR">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="VcI-ng-hsy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="selectedImageTintColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
                     </tabBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="aEe-b8-5Tj"/>
-                        <segue destination="Wuk-QE-3xu" kind="relationship" relationship="viewControllers" id="AmU-By-c0B"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="OuS-Nm-BxC"/>
+                        <segue destination="Wuk-QE-3xu" kind="relationship" relationship="viewControllers" id="r5k-54-v8Q"/>
                     </connections>
                 </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1O4-dL-YxB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a1p-tF-HFa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-882" y="34"/>
+            <point key="canvasLocation" x="-1306" y="81"/>
         </scene>
         <!--Search View Controller-->
         <scene sceneID="DNM-pl-sJt">
@@ -128,6 +128,9 @@
                                     <segment title="Movies"/>
                                     <segment title="TV Shows"/>
                                 </segments>
+                                <connections>
+                                    <action selector="handleSelection:" destination="Wuk-QE-3xu" eventType="valueChanged" id="YSj-Cz-60U"/>
+                                </connections>
                             </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -145,9 +148,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="s73-wY-3wZ"/>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="search" id="bOK-YW-qe3"/>
+                    <tabBarItem key="tabBarItem" systemItem="search" id="sfF-hA-D9t"/>
                     <connections>
                         <outlet property="searchBar" destination="oXy-Ti-IDS" id="mnd-Qj-RjS"/>
+                        <outlet property="segControl" destination="eiG-hB-dPF" id="hXF-hA-Usj"/>
                         <outlet property="tableView" destination="oJF-Wx-Vee" id="FgW-qG-MXR"/>
                     </connections>
                 </viewController>
@@ -254,6 +258,7 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="dlr-Tw-qRs" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="Eyt-ah-oEA"/>
                             <constraint firstItem="oet-fv-TJP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="UZ0-TO-ky5"/>
@@ -265,7 +270,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="favorites" id="5lq-Jm-aYN"/>
+                    <tabBarItem key="tabBarItem" systemItem="featured" id="Foz-CK-ceP"/>
                     <connections>
                         <outlet property="listTypeSegOutlet" destination="dlr-Tw-qRs" id="JGS-wW-J01"/>
                         <outlet property="tableView" destination="oet-fv-TJP" id="eRU-KF-4Jc"/>
