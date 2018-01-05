@@ -270,11 +270,11 @@
                         <constraints>
                             <constraint firstItem="dlr-Tw-qRs" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="Eyt-ah-oEA"/>
                             <constraint firstItem="oet-fv-TJP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="UZ0-TO-ky5"/>
-                            <constraint firstItem="oet-fv-TJP" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Y3g-VR-p8G"/>
+                            <constraint firstItem="oet-fv-TJP" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" constant="-49" id="Y3g-VR-p8G"/>
                             <constraint firstItem="oet-fv-TJP" firstAttribute="firstBaseline" secondItem="dlr-Tw-qRs" secondAttribute="baseline" constant="20" id="c9E-cS-5HB"/>
                             <constraint firstItem="dlr-Tw-qRs" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="gqY-Q1-Gxf"/>
                             <constraint firstItem="oet-fv-TJP" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="ppQ-XU-U4l"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dlr-Tw-qRs" secondAttribute="trailing" constant="30" id="qEl-zR-g98"/>
+                            <constraint firstAttribute="trailing" secondItem="dlr-Tw-qRs" secondAttribute="trailing" constant="30" id="qEl-zR-g98"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
