@@ -109,15 +109,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         }
         if let imageURL = URL(string: Constats.Mdb.baseImgUrl + "/w92" + tempUrl) {
-            DispatchQueue.global().async {
-                let data = try? Data(contentsOf: imageURL)
-                if let data = data {
-                    let image = UIImage(data: data)
-                    DispatchQueue.main.async {
-                        cell.poster.image = image
-                    }
-                }
-            }
+            cell.poster.loadImageIntoCacheFromUrl(imageURL: imageURL)
         }
         return cell
     }
