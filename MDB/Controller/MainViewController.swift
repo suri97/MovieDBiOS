@@ -93,6 +93,19 @@ class MainViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         return 120
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "MovieDetail", sender: indexPath)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "MovieDetail") {
+            if let MovieDetailVC = segue.destination as? MovieDetailViewController {
+                let IndexPath = sender as! IndexPath
+                MovieDetailVC.MovieID = self.MovieData.results[IndexPath.row].id
+            }
+        }
+    }
+    
     func fetchData(ListType: String) -> Void {
         self.MovieData = MovieJson(results: [])
         self.tableView.reloadData()
