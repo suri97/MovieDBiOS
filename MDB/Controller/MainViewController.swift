@@ -29,6 +29,14 @@ class MainViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         setUpViews()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        let selectedRow: IndexPath? = tableView.indexPathForSelectedRow
+        if let selectedRowNotNill = selectedRow {
+            tableView.deselectRow(at: selectedRowNotNill, animated: true)
+        }
+    }
+    
     @IBAction func listTypeChanged(_ sender: UISegmentedControl) {
         fetchData(ListType: self.ListType[sender.selectedSegmentIndex])
     }
